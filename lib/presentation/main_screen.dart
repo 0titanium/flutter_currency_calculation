@@ -11,12 +11,12 @@ class MainScreen extends StatefulWidget {
 }
 
 List<String> searchCountries = ['KRW', 'USD'];
-List<String> resultCountries = [ 'USD', 'KRW','JPY'];
+List<String> resultCountries = ['USD', 'KRW', 'JPY'];
 
 class _MainScreenState extends State<MainScreen> {
   String countriesUpValue = searchCountries.first;
   String countriesDownValue = resultCountries.first;
-  final  _searchTextEditingController = TextEditingController();
+  final _searchTextEditingController = TextEditingController();
   final _resultTextEditingController = TextEditingController();
   double? searchCountryValueInfo;
   double _number1 = 0;
@@ -27,11 +27,10 @@ class _MainScreenState extends State<MainScreen> {
     _searchTextEditingController.text = '';
     _resultTextEditingController.text = '';
   }
+
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<MainScreenViewModel>();
-
-
 
     return Scaffold(
       appBar: AppBar(
@@ -49,17 +48,19 @@ class _MainScreenState extends State<MainScreen> {
                     child: TextFormField(
                       controller: _searchTextEditingController,
                       keyboardType: TextInputType.number,
-                      inputFormatters: [FilteringTextInputFormatter.digitsOnly], //숫자 입력만 가능
                       decoration: InputDecoration(hintText: '숫자를 입력하세요'),
-                      onChanged: (value){
+                      onChanged: (value) {
                         setState(() {
-                          _number1 = double.tryParse(value)  ?? 0;
-                          // _resultTextEditingController.text = (_number1 * viewModel.onSearch(USD)).toString();
-                          _resultTextEditingController.text = (_number1 * 3).toString();
-
+                          _number1 = double.tryParse(value) ?? 0;
+                          viewModel.onSearch(countriesUpValue).then((_) {
+                            print(viewModel.currencyInfo!.conversionRates);
+                            _resultTextEditingController.text = (_number1 *
+                                    viewModel.currencyInfo!
+                                        .conversionRates[countriesDownValue]!)
+                                .toString();
+                          });
                         });
                       },
-
                     ),
                   ),
                   DropdownButton(

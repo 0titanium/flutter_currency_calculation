@@ -9,7 +9,9 @@ part of 'currency.dart';
 _$CurrencyImpl _$$CurrencyImplFromJson(Map<String, dynamic> json) =>
     _$CurrencyImpl(
       timeLastUpdateUtc: json['timeLastUpdateUtc'] as String,
-      conversionRates: Map<String, num>.from(json['conversionRates'] as Map),
+      conversionRates: (json['conversionRates'] as Map<String, dynamic>).map(
+        (k, e) => MapEntry(k, (e as num).toDouble()),
+      ),
     );
 
 Map<String, dynamic> _$$CurrencyImplToJson(_$CurrencyImpl instance) =>

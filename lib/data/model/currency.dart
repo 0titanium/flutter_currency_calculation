@@ -9,7 +9,7 @@ part 'currency.g.dart';
 class Currency with _$Currency {
   const factory Currency({
     required String timeLastUpdateUtc,
-    required Map<String, num> conversionRates,
+    required Map<String, double> conversionRates,
   }) = _Currency;
 
   factory Currency.fromJson(Map<String, Object?> json) =>

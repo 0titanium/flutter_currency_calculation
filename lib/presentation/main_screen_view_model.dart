@@ -16,10 +16,18 @@ class MainScreenViewModel with ChangeNotifier {
 
   Currency? currencyInfo;
 
-  void onSearch(String query) async {
+  Map<String, double> currency = {};
+
+  Future<void> onSearch(String query) async {
     _isLoading = true;
     notifyListeners();
+
     currencyInfo = await _currencyRepository.getCurrency(query);
     notifyListeners();
+
+    currency = currencyInfo!.conversionRates;
+    notifyListeners();
+
+    return;
   }
 }
