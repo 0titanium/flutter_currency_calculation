@@ -14,7 +14,7 @@ Map<String, double> toMap(Map<String, dynamic> map) {
   Map<String, double> conversionRatesMap = {};
 
   map.forEach((key, value) {
-    conversionRatesMap[key] = value;
+    conversionRatesMap[key] = value.toDouble();
   });
 
   return conversionRatesMap;
