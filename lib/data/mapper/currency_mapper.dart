@@ -5,7 +5,7 @@ extension ToCurrency on CurrencyDto {
   Currency toCurrency() {
     return Currency(
       timeLastUpdateUtc: timeLastUpdateUtc ?? '',
-      conversionRates: ConversionRates(),
+      conversionRates: conversionRates!,
     );
   }
 }

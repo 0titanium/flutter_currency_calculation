@@ -15,3 +15,9 @@ class CurrencyRepositoryImpl implements CurrencyRepository {
     return currencyDto.toCurrency();
   }
 }
+
+void main() async {
+  final impl = await CurrencyRepositoryImpl(CurrencyApi()).getCurrency('USD');
+  print(impl.timeLastUpdateUtc);
+  print(impl.conversionRates.krw);
+}
