@@ -319,7 +319,6 @@ class _MainScreenState extends State<MainScreen> {
   String countriesDownValue = resultCountries.first;
   final _searchTextEditingController = TextEditingController();
   final _resultTextEditingController = TextEditingController();
-  double? searchCountryValueInfo;
   double _number1 = 0.0;
   double _number2 = 0.0;
 
@@ -360,6 +359,7 @@ class _MainScreenState extends State<MainScreen> {
                                     viewModel.currencyInfo!
                                         .conversionRates[countriesDownValue]!)
                                 .toString();
+                            _number2 = double.parse(_resultTextEditingController.text);
                           });
                         });
                       },
@@ -412,6 +412,7 @@ class _MainScreenState extends State<MainScreen> {
                                     viewModel.currencyInfo!
                                         .conversionRates[countriesUpValue]!)
                                 .toString();
+                            _number1 = double.parse(_searchTextEditingController.text);
                           });
                         });
                       },
