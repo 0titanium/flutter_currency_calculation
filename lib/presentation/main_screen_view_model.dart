@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_currency_calculation/data/dto/currency_dto.dart';
 import 'package:flutter_currency_calculation/data/model/currency.dart';
 import 'package:flutter_currency_calculation/data/repository/currency_repository.dart';
 
@@ -13,7 +14,8 @@ class MainScreenViewModel with ChangeNotifier {
 
   bool get isLoading => _isLoading;
 
-  Currency? currencyInfo;
+  Currency currencyInfo =
+      Currency(timeLastUpdateUtc: '', conversionRates: ConversionRates());
 
   void onSearch(String query) async {
     _isLoading = true;
