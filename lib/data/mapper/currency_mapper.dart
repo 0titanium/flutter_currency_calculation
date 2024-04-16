@@ -5,7 +5,17 @@ extension ToCurrency on CurrencyDto {
   Currency toCurrency() {
     return Currency(
       timeLastUpdateUtc: timeLastUpdateUtc ?? '',
-      conversionRates: conversionRates!,
+      conversionRates: conversionRates!.toJson() as Map<String, num>,
     );
   }
 }
+
+// Map<String, num> toMap(Map<String, dynamic> map) {
+//   Map<String, num> conversionRatesMap = {};
+//
+//   map.forEach((key, value) {
+//     conversionRatesMap[key] = value;
+//   });
+//
+//   return conversionRatesMap;
+// }

@@ -14,8 +14,7 @@ class MainScreenViewModel with ChangeNotifier {
 
   bool get isLoading => _isLoading;
 
-  Currency currencyInfo =
-      Currency(timeLastUpdateUtc: '', conversionRates: ConversionRates());
+  Currency? currencyInfo;
 
   void onSearch(String query) async {
     _isLoading = true;

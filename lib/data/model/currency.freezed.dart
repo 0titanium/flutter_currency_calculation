@@ -21,7 +21,7 @@ Currency _$CurrencyFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Currency {
   String get timeLastUpdateUtc => throw _privateConstructorUsedError;
-  ConversionRates get conversionRates => throw _privateConstructorUsedError;
+  Map<String, num> get conversionRates => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +34,7 @@ abstract class $CurrencyCopyWith<$Res> {
   factory $CurrencyCopyWith(Currency value, $Res Function(Currency) then) =
       _$CurrencyCopyWithImpl<$Res, Currency>;
   @useResult
-  $Res call({String timeLastUpdateUtc, ConversionRates conversionRates});
+  $Res call({String timeLastUpdateUtc, Map<String, num> conversionRates});
 }
 
 /// @nodoc
@@ -61,7 +61,7 @@ class _$CurrencyCopyWithImpl<$Res, $Val extends Currency>
       conversionRates: null == conversionRates
           ? _value.conversionRates
           : conversionRates // ignore: cast_nullable_to_non_nullable
-              as ConversionRates,
+              as Map<String, num>,
     ) as $Val);
   }
 }
@@ -74,7 +74,7 @@ abstract class _$$CurrencyImplCopyWith<$Res>
       __$$CurrencyImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String timeLastUpdateUtc, ConversionRates conversionRates});
+  $Res call({String timeLastUpdateUtc, Map<String, num> conversionRates});
 }
 
 /// @nodoc
@@ -97,9 +97,9 @@ class __$$CurrencyImplCopyWithImpl<$Res>
           : timeLastUpdateUtc // ignore: cast_nullable_to_non_nullable
               as String,
       conversionRates: null == conversionRates
-          ? _value.conversionRates
+          ? _value._conversionRates
           : conversionRates // ignore: cast_nullable_to_non_nullable
-              as ConversionRates,
+              as Map<String, num>,
     ));
   }
 }
@@ -108,15 +108,22 @@ class __$$CurrencyImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$CurrencyImpl implements _Currency {
   const _$CurrencyImpl(
-      {required this.timeLastUpdateUtc, required this.conversionRates});
+      {required this.timeLastUpdateUtc,
+      required final Map<String, num> conversionRates})
+      : _conversionRates = conversionRates;
 
   factory _$CurrencyImpl.fromJson(Map<String, dynamic> json) =>
       _$$CurrencyImplFromJson(json);
 
   @override
   final String timeLastUpdateUtc;
+  final Map<String, num> _conversionRates;
   @override
-  final ConversionRates conversionRates;
+  Map<String, num> get conversionRates {
+    if (_conversionRates is EqualUnmodifiableMapView) return _conversionRates;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_conversionRates);
+  }
 
   @override
   String toString() {
@@ -130,14 +137,14 @@ class _$CurrencyImpl implements _Currency {
             other is _$CurrencyImpl &&
             (identical(other.timeLastUpdateUtc, timeLastUpdateUtc) ||
                 other.timeLastUpdateUtc == timeLastUpdateUtc) &&
-            (identical(other.conversionRates, conversionRates) ||
-                other.conversionRates == conversionRates));
+            const DeepCollectionEquality()
+                .equals(other._conversionRates, _conversionRates));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, timeLastUpdateUtc, conversionRates);
+  int get hashCode => Object.hash(runtimeType, timeLastUpdateUtc,
+      const DeepCollectionEquality().hash(_conversionRates));
 
   @JsonKey(ignore: true)
   @override
@@ -156,7 +163,7 @@ class _$CurrencyImpl implements _Currency {
 abstract class _Currency implements Currency {
   const factory _Currency(
       {required final String timeLastUpdateUtc,
-      required final ConversionRates conversionRates}) = _$CurrencyImpl;
+      required final Map<String, num> conversionRates}) = _$CurrencyImpl;
 
   factory _Currency.fromJson(Map<String, dynamic> json) =
       _$CurrencyImpl.fromJson;
@@ -164,7 +171,7 @@ abstract class _Currency implements Currency {
   @override
   String get timeLastUpdateUtc;
   @override
-  ConversionRates get conversionRates;
+  Map<String, num> get conversionRates;
   @override
   @JsonKey(ignore: true)
   _$$CurrencyImplCopyWith<_$CurrencyImpl> get copyWith =>
