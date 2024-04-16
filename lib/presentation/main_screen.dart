@@ -377,8 +377,13 @@ class _MainScreenState extends State<MainScreen> {
                     onChanged: (String? value) {
                       setState(() {
                         countriesUpValue = value!;
-                        _searchTextEditingController.text = '0';
-                        _resultTextEditingController.text = '0';
+                        viewModel.onSearch(countriesUpValue).then((_) {
+                          // print(viewModel.currencyInfo!.conversionRates);
+                          _resultTextEditingController.text = (_number1 *
+                                  viewModel.currencyInfo!
+                                      .conversionRates[countriesDownValue]!)
+                              .toString();
+                        });
                       });
 
                       // viewModel.onSearch(value!);
@@ -404,8 +409,8 @@ class _MainScreenState extends State<MainScreen> {
                           viewModel.onSearch(countriesDownValue).then((_) {
                             // print(viewModel.currencyInfo!.conversionRates);
                             _searchTextEditingController.text = (_number2 *
-                                viewModel.currencyInfo!
-                                    .conversionRates[countriesUpValue]!)
+                                    viewModel.currencyInfo!
+                                        .conversionRates[countriesUpValue]!)
                                 .toString();
                           });
                         });
@@ -424,8 +429,13 @@ class _MainScreenState extends State<MainScreen> {
                     onChanged: (String? value) {
                       setState(() {
                         countriesDownValue = value!;
-                        _searchTextEditingController.text = '0';
-                        _resultTextEditingController.text = '0';
+                        viewModel.onSearch(countriesDownValue).then((_) {
+                          // print(viewModel.currencyInfo!.conversionRates);
+                          _searchTextEditingController.text = (_number2 *
+                              viewModel.currencyInfo!
+                                  .conversionRates[countriesUpValue]!)
+                              .toString();
+                        });
                       });
                       // viewModel.onSearch(value!);
                       // _resultTextEditingController.text =
