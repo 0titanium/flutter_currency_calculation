@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_currency_calculation/presentation/main_screen_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -10,20 +11,27 @@ class MainScreen extends StatefulWidget {
 }
 
 List<String> searchCountries = ['KRW', 'USD'];
-List<String> resultCountries = ['KRW', 'USD'];
+List<String> resultCountries = [ 'USD', 'KRW','JPY'];
 
 class _MainScreenState extends State<MainScreen> {
   String countriesUpValue = searchCountries.first;
   String countriesDownValue = resultCountries.first;
+  final  _searchTextEditingController = TextEditingController();
+  final _resultTextEditingController = TextEditingController();
+  double? searchCountryValueInfo;
+  double _number1 = 0;
 
+  @override
+  void initState() {
+    super.initState();
+    _searchTextEditingController.text = '';
+    _resultTextEditingController.text = '';
+  }
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<MainScreenViewModel>();
 
-    final _searchTextEdtingController = TextEditingController();
-    final _resultTextEditingController = TextEditingController();
 
-    double? searchCountryValueInfo;
 
     return Scaffold(
       appBar: AppBar(
@@ -32,17 +40,26 @@ class _MainScreenState extends State<MainScreen> {
       body: Container(
         child: Center(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Row(
                 children: [
                   Container(
                     width: 200,
                     height: 40,
-                    child: TextField(
-                      controller: _searchTextEdtingController,
+                    child: TextFormField(
+                      controller: _searchTextEditingController,
                       keyboardType: TextInputType.number,
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly], //숫자 입력만 가능
                       decoration: InputDecoration(hintText: '숫자를 입력하세요'),
+                      onChanged: (value){
+                        setState(() {
+                          _number1 = double.tryParse(value)  ?? 0;
+                          // _resultTextEditingController.text = (_number1 * viewModel.onSearch(USD)).toString();
+                          _resultTextEditingController.text = (_number1 * 3).toString();
+
+                        });
+                      },
+
                     ),
                   ),
                   DropdownButton(
